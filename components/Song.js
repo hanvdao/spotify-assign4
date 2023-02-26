@@ -9,8 +9,9 @@ import {
 } from "react-native";
 import { Themes } from "../assets/Themes";
 import millisToMinutesAndSeconds from "../utils/millisToMinutesAndSeconds";
+import { AntDesign } from "@expo/vector-icons";
 
-export default function Song({ songInfo }) {
+export default function Song({ songInfo, navigation }) {
   // console.log("HELOOFDN", songInfo);
 
   let albumName = songInfo["albumName"];
@@ -20,6 +21,13 @@ export default function Song({ songInfo }) {
 
   return (
     <View style={styles.songContainer}>
+      <Pressable
+        onPress={() =>
+          navigation.navigate("PreviewScreen", { url: songInfo["previewUrl"] })
+        }
+      >
+        <AntDesign name="play" size={20} color="green" />
+      </Pressable>
       <View>
         <Image
           style={styles.albumPic}
@@ -56,6 +64,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 3,
+    marginLeft: 10,
   },
 
   songArtist: {
